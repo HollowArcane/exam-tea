@@ -1,8 +1,8 @@
 const form = document.getElementById("form");
 
-function createDepense(form)
+function createCueillette(form)
 {
-    sendPostRequest("insert-depense.php", form, req => {
+    sendPostRequest("insert-cueillette.php", form, req => {
         if(req.responseText == "success")
         {  }
         else
@@ -12,5 +12,5 @@ function createDepense(form)
 
 form.addEventListener("submit", e => {
     e.preventDefault();
-    createDepense(form);
+    createCueillette(form);
 })

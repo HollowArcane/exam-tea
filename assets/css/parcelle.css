@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+.container{
+    background-image: linear-gradient(45deg,#21D4FD 0%,#B721FF 100%);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.container header{
+    box-shadow:  1px 1px 17px 3px #00000059;
+    height: 90px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    margin: 0 54px 0 54px;
+    justify-content: space-between;
+    padding: 0 100px 0 100px;
+}
+
+/* .container .variete{
+    height: 600px;
+    margin: 53px;
+    border-radius: 9px;
+    background-color: #fff;
+    display: flex;
+} */
+.container header img{
+    width: 7%;
+}
+.container header ul{
+    display: flex;
+    gap: 65px;
+}
+.container header ul li{
+    position: relative;
+}
+.container header ul li a{
+    color: #000;
+}
+.container header ul li a:hover{
+    color:#B721FF;
+}
+.container header ul li a::before {
+    position: absolute;
+    left: 1px;
+    bottom: 0;
+    content: "";
+    background-color:#B721FF;
+    width: 0%;
+    height: 2px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.container header ul li a:hover::before{
+    width: 100%;
+}
+
+.container header ul li .active::before{
+    position: absolute;
+    left: 1px;
+    bottom: 0;
+    content: "";
+    background-color:#B721FF;
+    width: 100%;
+    height: 2px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.parcelle {
+    box-shadow:  1px 1px 17px 3px #00000059;
+    padding-right: 104px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    width: 1200px;
+    height:600px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    gap: 50px;
+    border-radius: 14px;
+}
+.parcelle .photo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border-radius: 17px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.parcelle .photo img{
+    width: 100%;
+    height: 100%;
+}
+
+.parcelle form{
+    width: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: #fff;
+    padding: 19px;
+    border-radius: 0 17px 17px 0;
+}
+.parcelle form .form-control{
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.parcelle form .form-control input[type="text"],
+input[type="number"]{
+    background-color: #EAEEED;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border-style: none;
+    outline: none;
+}
+.parcelle form .form-control input[type="text"],
+input[type="number"]:focus{
+    opacity: 0.7;
+}
+
+.parcelle form input[type="submit"]{
+    padding: 12px 48px;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border-width: 0;
+    background-color: #1A1B27;
+    font-weight: 600;
+    width: 100%;
+}
+
+.parcelle form .form-control select{
+    padding: 13px;
+    border-radius: 50px;
+    border: none;
+}

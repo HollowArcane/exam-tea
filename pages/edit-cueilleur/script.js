@@ -5,35 +5,33 @@ function createCueilleur(form)
 {
     sendPostRequest("insert-cueilleur.php", form, req => {
         if(req.responseText == "success")
-        {  }
+        { insertMsg(); }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 function updateCueilleur(id, form)
 {
     sendPostRequest(`update-cueilleur.php?id=${id}`, form, req => {
         if(req.responseText == "success")
-        {  }
+        { updateMsg(); }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 function getCueilleur(id)
 {
     sendGetRequest(`get-cueilleur.php?id=${id}`, req => {
         try
-        {
-            const data = JSON.parse(req.responseText);
-        }
+        { const data = JSON.parse(req.responseText); }
         catch (error)
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 form.addEventListener("submit", e => {
     e.preventDefault();
-    modeUpdate ? createCueilleur(form): updateCueilleur(form);
+    modeUpdate ? updateCueilleur(form): createCueilleur(form);
 })

@@ -1,6 +1,4 @@
 <?php
-    include('connection/connexion.php');
-
     function login($co, $mail, $mdp) {
         $query = "SELECT * FROM admin WHERE email = '$mail' AND mdp = SHA1('$mdp')";
         $result = mysqli_query($co, $query); 
@@ -111,7 +109,7 @@
     }
 
     function insertCueilleur($co, $nom, $genre , $naissance , $salaire) {
-        $query = "INSERT INTO cueilleur (nom, genre , naissance , salaire) VALUES ('$nom', '$genre', '$naissance , '$salaire')";
+        $query = "INSERT INTO cueilleur (nom, genre , naissance , salaire) VALUES ('$nom', '$genre', '$naissance' , '$salaire')";
         $result = mysqli_query($co, $query);
     }
     

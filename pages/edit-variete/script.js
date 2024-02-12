@@ -5,7 +5,7 @@ function createVariete(form)
 {
     sendPostRequest("insert-variete.php", form, req => {
         if(req.responseText == "success")
-        {  }
+        { insertMsg(); }
         else
         { error(); }
     }, error);
@@ -15,7 +15,7 @@ function updateVariete(id, form)
 {
     sendPostRequest(`update-variete.php?id=${id}`, form, req => {
         if(req.responseText == "success")
-        {  }
+        { updateMsg(); }
         else
         { error(); }
     }, error);
@@ -35,5 +35,5 @@ function getVariete(id)
 
 form.addEventListener("submit", e => {
     e.preventDefault();
-    modeUpdate ? createVariete(form): updateVariete(form);
+    modeUpdate ? updateVariete(form): createVariete(form);
 })

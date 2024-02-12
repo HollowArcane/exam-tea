@@ -1,39 +1,58 @@
 const form = document.getElementById("form");
+const select = document.getElementById("variete");
 let modeUpdate = false;
 
 function createParcelle(form)
 {
     sendPostRequest("insert-parcelle.php", form, req => {
         if(req.responseText == "success")
-        {  }
+        { insertMsg(); }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 function updateParcelle(id, form)
 {
     sendPostRequest(`update-parcelle.php?id=${id}`, form, req => {
         if(req.responseText == "success")
-        {  }
+        { updateMsg() }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 function getParcelle(id)
 {
-    sendGetRequest(`get-parcelle.php${id}`, req => {
+    sendGetRequest(`get-parcelle.php?id=${id}`, req => {
         try
         {
             const data = JSON.parse(req.responseText);
         }
         catch (error)
         { error(); }
-    }, error);
+    }, () => error());
 }
 
+function addVarieteOptions(data)
+{
+    select.replaceChildren();
+    for(let item of data)
+    { select.append(newNode("option", { value: item.id }, [ textNode(item.nom) ])); }
+}
+
+function loadVariete()
+{
+    sendGetRequest(`../list-variete/get-varietes.php`, req => {
+        try
+        { addVarieteOptions(JSON.parse(req.responseText)); }
+        catch (error)
+        { error(); }
+    }, () => error());
+}
+
+loadVariete();
 form.addEventListener("submit", e => {
     e.preventDefault();
-    modeUpdate ? createParcelle(form): updateParcelle(form);
+    modeUpdate ? updateParcelle(form): createParcelle(form);
 })

@@ -1,16 +1,16 @@
 const form = document.getElementById("form");
 
-function handle_login(form)
+function createDepense(form)
 {
-    sendPostRequest("handle-login.php", form, req => {
+    sendPostRequest("insert-depense.php", form, req => {
         if(req.responseText == "success")
-        { window.location = "../edit-parcelle"; }
+        {  }
         else
         { error(); }
-    }, () => error());
+    }, error);
 }
 
 form.addEventListener("submit", e => {
     e.preventDefault();
-    handle_login(form);
+    createDepense(form);
 })

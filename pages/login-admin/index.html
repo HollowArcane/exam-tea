@@ -3,17 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Administrateur</title>
+    
+    <link rel="stylesheet" href="../../assets/css/form_admin.css">
 
-    <script src="../../assets/js/function-XHR.js"></script>
-    <script src="../../assets/js/function.js"></script>
-    <script src="script.js" defer></script>
+    <script type="text/javascript" src="../../assets/js/function-XHR.js"></script>
+    <script type="text/javascript" src="../../assets/js/function.js"></script>
+    <script type="text/javascript" src="script.js" defer></script>
 </head>
 <body>
-    <form id="form">
-        <p><input type="text" name="email"> Username</p>
-        <p><input type="text" name="password"> Password</p>
-        <button> Submit </button>
-    </form>
+    <div class="container">
+
+        <div class="formulaire">
+            <div class="photo">
+                <img src="../../assets/img/Drinking tea-bro.png" alt="">
+                <a href="../login-user"> << Retour</a>
+            </div>
+
+            <form id="form"> 
+                <div class="head">
+                    <h1>Administrateur</h1>
+                    <!-- <img src="../img/Drinking tea-bro.png" alt="" style="width: 40%;"> -->
+                </div>
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Email" value="rambao@gmail.com">
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Your password" value="rambao">
+                </div>
+                <input type="submit" value="Se connecter">
+            </form>
+        </div>
+
+    </div>
 </body>
 </html>
