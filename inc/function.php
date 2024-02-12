@@ -1,6 +1,18 @@
 <?php
+    include('connection/connexion.php');
+
     function login($co, $mail, $mdp) {
         $query = "SELECT * FROM admin WHERE email = '$mail' AND mdp = SHA1('$mdp')";
+        $result = mysqli_query($co, $query); 
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row['id'];
+        } else {
+            return null;
+        }
+    }
+
+    function loginUser($co, $mail, $mdp) {
+        $query = "SELECT * FROM user WHERE email = '$mail' AND mdp = SHA1('$mdp')";
         $result = mysqli_query($co, $query); 
         if ($row = mysqli_fetch_assoc($result)) {
             return $row['id'];
@@ -124,15 +136,23 @@
         return $array;
     }    
 
-    function insertDepense($co, $desc , $valeur) {
-        $query = "INSERT INTO depense (nom, description , valeur) VALUES ('$nom', '$desc', '$valeur')";
+    function insertDepense($co, $idCategorie , $valeur , $date) {
+        $query = "INSERT INTO depense (idCategorie, valeur , date) VALUES ('$idCategorie', '$valeur', '$date')";
         $result = mysqli_query($co, $query);
     }
 
     function deleteDepense($co, $id) {
-        $query = "DELETE FROM depense WHERE id = '$id'";
+        $query = "DELETE FROM depense WHERE idDepense = '$id'";
+        $result = mysqli_query($co, $query);
+    }    
+
+    #------ Saisie Cueillete --------#    
+
+    function insertCueillete( $idCueilleur , $idParcelle , $quantite , $date ){
+        $query = "INSERT INTO cueillette (idCueilleur, idParcelle , quantite , date) VALUES ('$idCueilleur', '$idParcelle', '$quantite' , '$date')";
         $result = mysqli_query($co, $query);
     }
 
+    
     
 ?>
