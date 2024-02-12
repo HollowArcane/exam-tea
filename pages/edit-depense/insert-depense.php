@@ -7,14 +7,13 @@
     if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
     { exit; }
 
-    $idCueilleur = $_POST["idCueilleur"];
-    $idParcelle = $_POST["idParcelle"];
-    $quantite = $_POST["quantite"];
+    $idCategorie = $_POST["idCategorie"];
+    $valeur = $_POST["valeur"];
     $date = $_POST["date"];
 
     try
     {
-        insertCueillete(dbConnect(), $idCueilleur , $idParcelle , $quantite , $date);    
+        insertDepense(dbConnect(), $idCategorie , $valeur , $date);    
         echo "success";
     }
     catch (\Throwable $th)

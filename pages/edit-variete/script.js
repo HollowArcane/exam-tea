@@ -8,7 +8,7 @@ function createVariete(form)
         { insertMsg(); }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 function updateVariete(id, form)
@@ -18,7 +18,7 @@ function updateVariete(id, form)
         { updateMsg(); }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 function getVariete(id)
@@ -30,7 +30,7 @@ function getVariete(id)
         }
         catch (error)
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 form.addEventListener("submit", e => {

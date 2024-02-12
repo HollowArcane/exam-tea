@@ -8,11 +8,9 @@
     { exit; }
 
     $desc = $_POST["description"];
-    $valeur = $_POST["valeur"];
-
     try
     {
-        insertDepense(dbConnect(), $desc , $valeur);    
+        insertCategorie(dbConnect(), $desc);    
         echo "success";
     }
     catch (\Throwable $th)

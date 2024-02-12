@@ -34,7 +34,10 @@ create table categorie(
     description VARCHAR(255)
 );
 
+
+
 create table depense(
+    idDepense INT PRIMARY KEY auto_increment,
     idCategorie INT REFERENCES categorie(id),
     valeur DOUBLE,
     date Date
@@ -81,7 +84,10 @@ INSERT INTO cueillette (idCueilleur, idParcelle, quantite, date) VALUES
 (1, 2, 300, '2024-02-02'),
 (2, 2, 400, '2024-02-02');
 
-
+insert into categorie (description) values 
+('logistique'),
+('carburant'),
+('engrais');
 
 
 ------- VIEW ----------
@@ -125,3 +131,19 @@ WHERE
 AND
     annees = '2024';
 
+
+
+SELECT
+    SUM(quantite) as total_cueillette,
+    MONTH(date) as mois, 
+    YEAR(date) as annees  
+FROM
+    cueillette
+WHERE 
+    MONTH(date) = '2'
+GROUP BY
+    mois , annees;
+
+
+
+SELECT SUM(valeur) as depense_total , idCategorie , date FROM Depense WHERE MONTH(date) = '2'AND YEAR(date) = '2024';

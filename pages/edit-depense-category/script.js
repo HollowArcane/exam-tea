@@ -1,16 +1,16 @@
 const form = document.getElementById("form");
 
-function createDepense(form)
+function createCategory(form)
 {
-    sendPostRequest("insert-depense.php", form, req => {
+    sendPostRequest("insert-category.php", form, req => {
         if(req.responseText == "success")
-        {  }
+        { insertMsg(); }
         else
         { error(); }
-    }, error);
+    }, () => error());
 }
 
 form.addEventListener("submit", e => {
     e.preventDefault();
-    createDepense(form);
+    createCategory(form);
 })
