@@ -4,7 +4,7 @@ function handle_login(form)
 {
     sendPostRequest("handle-login.php", form, req => {
         if(req.responseText == "success")
-        { window.location = "../list-parcelle"; }
+        { window.location = "../result"; }
         else
         { error(); }
     }, () => error());

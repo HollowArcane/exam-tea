@@ -4,7 +4,7 @@
     
     session_start();
 
-    if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
+    if(!isset($_SESSION["role"]) || $_SESSION["role"] != "user")
     { exit; }
 
     $idCategorie = $_POST["idCategorie"];

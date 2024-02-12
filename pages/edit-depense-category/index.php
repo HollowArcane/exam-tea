@@ -30,7 +30,9 @@
                 <li><a href="../edit-variete">Variete</a></li>
                 <li><a href="../edit-cueilleur">Cueilleurs</a></li>
                 <li><a href="../edit-depense-category" class="active">Categories</a></li>
-                <li><a href="../listes.html">Listes</a></li></ul>
+                <li><a href="../listes.html">Listes</a></li>
+                <li><a href="../login-admin">Déconnexion</a></li>
+            </ul>
         </header>
 
         <div class="categories">

@@ -16,6 +16,7 @@
     background-position: center;
     background-repeat: no-repeat;
     display: flex;    
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -83,7 +84,8 @@
     transition: 0.3s;
 }
 
-.categories {
+.resultat {
+    margin-bottom: 40px;
     box-shadow:  1px 1px 17px 3px #00000059;
     padding-right: 104px;
     /* position: absolute;
@@ -99,7 +101,7 @@
     gap: 50px;
     border-radius: 14px;
 }
-.categories .photo{
+.resultat .photo{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -110,12 +112,12 @@
     background-color: #fff;
     overflow: hidden;
 }
-.categories .photo img{
+.resultat .photo img{
     width: 100%;
     height: 100%;
 }
 
-.categories form{
+.resultat form{
     width: 370px;
     display: flex;
     flex-direction: column;
@@ -126,27 +128,29 @@
     padding: 19px;
     border-radius: 0 17px 17px 0;
 }
-.categories form .form-control{
+.resultat form .form-control{
     gap: 12px;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.categories form .form-control input[type="text"],
-input[type="number"]{
+.resultat form .form-control input[type="text"],
+input[type="number"],
+input[type="date"]{
     background-color: #EAEEED;
     padding: 12px 24px;
     border-radius: 50px;
     border-style: none;
     outline: none;
 }
-.categories form .form-control input[type="text"],
-input[type="number"]:focus{
+.resultat form .form-control input[type="text"],
+input[type="number"],
+input[type="date"]:focus{
     opacity: 0.7;
 }
 
-.categories form input[type="submit"]{
+.resultat form input[type="submit"]{
     padding: 12px 48px;
     border-radius: 50px;
     color: #fff;
@@ -158,8 +162,34 @@ input[type="number"]:focus{
     width: 100%;
 }
 
-.categories form .form-control select{
+.resultat form .form-control select{
     padding: 13px;
     border-radius: 50px;
     border: none;
+}
+
+/* CSS pour la classe tableau */
+.tableau {
+    margin-top: 20px; /* Ajoute un espace en haut du tableau */
+    background-color: #333; /* Couleur de fond du tableau */
+    padding: 10px; /* Ajoute un espace à l'intérieur du tableau */
+    border-radius: 5px; /* Ajoute des coins arrondis au tableau */
+}
+
+/* CSS pour les cellules du tableau */
+.tableau th,
+.tableau td {
+    padding: 8px; /* Ajoute de l'espace à l'intérieur des cellules */
+    text-align: center; /* Centre le texte à l'intérieur des cellules */
+}
+
+/* CSS pour les en-têtes de colonne du tableau */
+.tableau th {
+    background-color: #555; /* Couleur de fond des en-têtes de colonne */
+    color: white; /* Couleur du texte des en-têtes de colonne */
+}
+
+/* CSS pour les lignes impaires du tableau */
+.tableau tr:nth-child(odd) {
+    background-color: #777; /* Couleur de fond des lignes impaires */
 }

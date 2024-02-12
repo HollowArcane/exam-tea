@@ -34,14 +34,14 @@ function getParcelle(id)
     }, () => error());
 }
 
-function addVarieteOptions(data)
+function addVarieteOptions(select, data)
 {
     select.replaceChildren();
     for(let item of data)
     { select.append(newNode("option", { value: item.id }, [ textNode(item.nom) ])); }
 }
 
-function loadVariete()
+function loadVariete(select)
 {
     sendGetRequest(`../list-variete/get-varietes.php`, req => {
         try
@@ -51,7 +51,7 @@ function loadVariete()
     }, () => error());
 }
 
-loadVariete();
+loadVariete(select);
 form.addEventListener("submit", e => {
     e.preventDefault();
     modeUpdate ? updateParcelle(form): createParcelle(form);

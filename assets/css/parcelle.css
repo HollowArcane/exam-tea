@@ -15,10 +15,14 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position: relative;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
 }
 
 .container header{
+    position: fixed;
+    top: 0;
     box-shadow:  1px 1px 17px 3px #00000059;
     height: 90px;
     background-color: #fff;
@@ -82,10 +86,10 @@
 .parcelle {
     box-shadow:  1px 1px 17px 3px #00000059;
     padding-right: 104px;
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50% , -50%); */
     width: 1200px;
     height:600px;
     background-color: #fff;

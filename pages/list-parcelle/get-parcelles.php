@@ -4,7 +4,7 @@
 
     session_start();
 
-    if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
+    if(!isset($_SESSION["role"]))
     { exit; }
 
     echo json_encode(getAllParcelle(dbConnect()));
