@@ -15,12 +15,12 @@ function getPaiements(tableBody, form)
 {
     sendPostRequest("get-paiement.php", form, req => {
         try
-        { setTable(tableBody, JSON.parse(req.responseText), [ "date", "nom", "quantite", "bonus", "montant" ]); }
-        catch (err)
         {
-            console.log(err);
-            error();
+            setTable(tableBody, JSON.parse(req.responseText), [ "date", "nom", "quantite", "bonus", "montant" ]);
+            console.log("Données récupérées avec succès")
         }
+        catch (err)
+        { error();}
     }, () => error());
 }
 
