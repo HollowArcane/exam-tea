@@ -34,9 +34,6 @@
             </ul>
         </header>
         <div class="resultat">
-            <div class="photo">
-                <img src="../../assets/img/diffe_rents-types-de.jpg" alt="">
-            </div>
             <form id="form">              
                 <div class="head">
                     <h1></h1>
@@ -53,8 +50,7 @@
                 
                 <input type="submit" value="OK">
             </form>
-        </div>
-        <div class="tableau" st>
+            <div class="tableau" st>
             <table border="1" style="color: #fff;">
                 <thead>
                     <tr>
@@ -64,6 +60,7 @@
                 </thead>    
                 <tbody id="table-body"></tbody>
             </table>
+        </div>
         </div>
     </div>
     

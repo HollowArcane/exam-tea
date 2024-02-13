@@ -75,6 +75,7 @@ INSERT INTO configuration VALUES(NULL, 'poids minimum', 10),(NULL, 'bonus', 10),
 
 
 INSERT INTO mois_regeneration VALUES(1, '01'),(3, '03'),(4, '04');
+
 CREATE OR REPLACE VIEW v_mois_regeneration AS
 SELECT * FROM mois_regeneration
 UNION ALL SELECT mois - 12, label FROM mois_regeneration; 
@@ -104,6 +105,9 @@ INSERT INTO cueillette (idCueilleur, idParcelle, quantite, date) VALUES
 (1, 1, 500, '2024-02-01'),
 (1, 2, 300, '2024-02-02'),
 (2, 2, 400, '2024-02-02');
+
+INSERT INTO cueillette (idCueilleur, idParcelle, quantite, date) VALUES
+(2, 1, 2, '2024-02-01');
 
 insert into categorie (description) values 
 ('logistique'),
@@ -139,20 +143,6 @@ JOIN
     cueilleur c ON c.id = ct.idCueilleur;
 
 
-SELECT
-    v.nom,
-    ct.date,
-    ct.quantite,
-    '10' as bonus,
-    v.salaire * (1+(10/100)) as montant
-FROM 
-    cueillette as ct
-JOIN
-    v_salaire_par_cueillette as v
-ON
-    ct.idCueilleur = v.id_cueilleur;
-
-
 CREATE OR REPLACE VIEW v_vente_cueillette AS
 SELECT
     c.date, c.quantite*v.prix AS valeur
@@ -167,4 +157,4 @@ JOIN
 ON
     p.variete = v.id;
 
-SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('2023/05/01') - 1 ELSE YEAR('2023/05/01') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('2023/05/01') > mois);
+

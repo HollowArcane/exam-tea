@@ -190,7 +190,7 @@
     }    
 
     function quantiteRestante($co , $dateFin ){     
-        $date_query = "SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('$dateFin') - 1 ELSE YEAR('$dateFin') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('$dateFin') > mois)";
+        $date_query = "SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('$dateFin') - 1 ELSE YEAR('$dateFin') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('$dateFin') >= mois)";
         
         $query = "SELECT vp.id_parcelle , (vp.kg_cueillette_par_mois - SUM(COALESCE(c.quantite, 0))) as reste  FROM v_pieds_par_parcelle as vp LEFT JOIN cueillette as c ON c.idParcelle = vp.id_parcelle  AND c.date BETWEEN ($date_query) AND '$dateFin' GROUP BY id_parcelle ";
         $result = mysqli_query($co, $query);
@@ -209,7 +209,26 @@
 
     #------------ PART 2 ------------------#
     function getPaiement($co , $dateDebut , $dateFin){
-        $query = "SELECT v.nom, ct.date, ct.quantite, '10' as bonus, v.salaire * (1+(10/100)) as montant FROM cueillette as ct JOIN v_salaire_par_cueillette as v ON ct.idCueilleur = v.id_cueilleur WHERE ct.date BETWEEN '$dateDebut' AND '$dateFin';";
+        $query = "SELECT
+        v.nom,
+        ct.date,
+        ct.quantite,
+        CASE
+            WHEN ct.quantite < poid_min.valeur
+            THEN malus.valeur*(ct.quantite - poid_min.valeur)
+            ELSE bonus.valeur*(ct.quantite - poid_min.valeur)
+        END as bonus,
+        CASE
+            WHEN ct.quantite < poid_min.valeur
+            THEN v.salaire * (1 + (malus.valeur*(ct.quantite - poid_min.valeur)/100))
+            ELSE v.salaire * (1 + (bonus.valeur*(ct.quantite - poid_min.valeur)/100))
+        END as montant
+    FROM
+        cueillette as ct
+    JOIN
+        v_salaire_par_cueillette as v ON ct.idCueilleur = v.id_cueilleur
+    JOIN
+        configuration AS bonus ON bonus.description = 'bonus' JOIN configuration AS malus ON malus.description = 'malus' JOIN configuration AS poid_min ON poid_min.description = 'poids minimum' WHERE ct.date BETWEEN '$dateDebut' AND '$dateFin';";
         $result = mysqli_query($co, $query);     
         $array = array();
         while($row = mysqli_fetch_assoc($result)) {
@@ -255,5 +274,71 @@
         $result = mysqli_query($co, $query);     
     }
 
+    function getRegeneration( $co ){
+        $query = "select*from mois_regeneration "; 
+        $result = mysqli_query($co, $query);     
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $array[] = $row; 
+        }
+        return $array;
+    }
+
+    function getPoidsMinimal( $co ){
+        $query = "select*from configuration where description = 'poids minimum' "; 
+        $result = mysqli_query($co, $query);     
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $array[] = $row; 
+        }
+        return $array;
+    }
+
+    function getBonus( $co ){
+        $query = "select*from configuration where description = 'bonus' "; 
+        $result = mysqli_query($co, $query);     
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $array[] = $row; 
+        }
+        return $array;
+    }
+    function getMalus( $co ){
+        $query = "select*from configuration where description = 'malus' "; 
+        $result = mysqli_query($co, $query);     
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $array[] = $row; 
+        }
+        return $array;
+    }
+
+    function getFinalData($co , $date) {        
+        $quantiteRestante = quantiteRestante($co , $date );
+        
+        $query = "SELECT * FROM v_pieds_par_parcelle ";
+        $result = mysqli_query($co, $query);
+        
+        $array = array();
+    
+        while ($row = mysqli_fetch_assoc($result)) {
+            $tempArray = array();
+    
+            $tempArray['id'] = $row["id_parcelle"];
+            $tempArray['nom'] = $row["nom_du_variete"];
+            $tempArray['surface'] = $row["surface_metres_carres"];
+            $tempArray['nombre_pieds'] = $row["nombre_de_pieds"];
+            $tempArray['kg_par_mois'] = $row["kg_cueillette_par_mois"];
+            for ($i=0; $i < count($quantiteRestante) ; $i++) { 
+                if( $quantiteRestante[$i]['id_parcelle'] ==  $tempArray['id']  ){
+                    $tempArray['reste'] = $quantiteRestante[$i]['reste'];
+                }
+            }    
+            $array[] = $tempArray;
+        }
+    
+        return $array;
+    }
+    
     
 ?>

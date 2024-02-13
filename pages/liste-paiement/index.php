@@ -37,9 +37,6 @@
             </ul>
         </header>
         <div class="resultat">
-            <div class="photo">
-                <img src="../../assets/img/diffe_rents-types-de.jpg" alt="">
-            </div>
             <form id="form">                            
                 <div class="form-control">
                     <label for="date_debut">Date debut</label>
@@ -52,8 +49,7 @@
                 
                 <input type="submit" value="OK">
             </form>
-        </div>
-        <div class="tableau">
+            <div class="tableau">
             <table border="1" style="color: #fff;">
                 <thead>
                     <tr>
@@ -68,6 +64,8 @@
             
             </table>
         </div>
+        </div>
+        
     </div>
     
 </body>

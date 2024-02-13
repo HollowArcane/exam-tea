@@ -106,7 +106,7 @@
                 <h2>Configuration poids minimal Journalier pour un cueilleur</h2>
                 <form id="min-poids-form">
                     <label>Poids minimal</label>
-                    <input name="value" type="number" placeholder="Entrer poids minimal">
+                    <input id="min-poids-input" name="value" type="number" placeholder="Entrer poids minimal">
                     <input type="submit" value="Valider">
                 </form>
             </div>
@@ -117,7 +117,7 @@
                 <h2>Bonus pour les poids superieur au poids minimum</h2>
                 <form id="bonus-form">
                     <label>Bonus</label>    
-                    <input name="value" type="number" placeholder="Entrer Bonus">
+                    <input id="bonus-input" name="value" type="number" placeholder="Entrer Bonus">
                     <input type="submit" value="Valider">
                 </form>
             </div>
@@ -128,7 +128,7 @@
                 <h2>Mallus pour les poids inferieur au poids minimum</h2>
                 <form id="malus-form">
                     <label>Mallus</label>    
-                    <input name="value" type="number" placeholder="Entrer Mallus">
+                    <input id="malus-input" name="value" type="number" placeholder="Entrer Mallus">
                     <input type="submit" value="Valider">
                 </form>
             </div>
