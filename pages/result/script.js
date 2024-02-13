@@ -3,14 +3,7 @@ const tableBody = document.getElementById("table-body");
 
 function setTableData(tableBody, data)
 {
-    tableBody.append(newNode("tr", {}, [
-        newNode("td", {}, ["Cueillette Total"]),
-        newNode("td", {}, ["Prix de revient/kg"])
-    ]), newNode("tr", {}, [
-        newNode("td", {}, [textNode(data.poids_total)]),
-        newNode("td", {}, [textNode(parseInt(data.cout_revient)/parseInt(data.poids_total))])
-    ]));
-
+    tableBody.replaceChildren();
     for(let item of data.poids_restant)
     {
         tableBody.append(newNode("tr", {}, [
@@ -18,6 +11,14 @@ function setTableData(tableBody, data)
             newNode("td", {}, [textNode(item.reste)])
         ]));
     }
+
+    tableBody.append(newNode("tr", {}, [
+        newNode("td", {}, ["Cueillette Total"]),
+        newNode("td", {}, ["Prix de revient/kg"])
+    ]), newNode("tr", {}, [
+        newNode("td", {}, [textNode(data.poids_total || 0)]),
+        newNode("td", {}, [textNode(parseFloat(data.cout_revient || 0)/parseFloat(data.poids_total || 0))])
+    ]));
 }
 
 function getInfos(tableBody, form)
