@@ -134,7 +134,6 @@
             </div>
             <!-- fin prix de vente -->
         </div>
-        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

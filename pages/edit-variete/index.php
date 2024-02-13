@@ -64,8 +64,6 @@
                 <a href="../list-variete">Go to list VARIETE</a>
             </form>
         </div>
-        <?php include "../footer.html"; ?>
-
     </div>
 </body>
 </html>

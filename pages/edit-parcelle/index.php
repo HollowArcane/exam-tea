@@ -61,7 +61,6 @@
                 <a href="../list-parcelle">Go to list</a>
             </form>
         </div>
-        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

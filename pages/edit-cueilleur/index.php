@@ -67,7 +67,6 @@
                 <a href="../list-cueilleur">Go to list CUEILLEURS</a>
             </form>
         </div>
-        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>
