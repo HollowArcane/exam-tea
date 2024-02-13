@@ -53,6 +53,7 @@
 
             <a href="../edit-cueilleur"><< Retour vers formulaire CUEILLEURS</a>
         </div>
+        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

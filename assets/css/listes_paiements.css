@@ -87,8 +87,6 @@
 }
 
 .resultat {
-    margin-top: 160px;
-    margin-bottom: 10px;
     box-shadow:  1px 1px 17px 3px #00000059;
     padding-right: 104px;
     /* position: absolute;
@@ -100,8 +98,8 @@
     background-color: #fff;
     display: flex;
     align-items: center;
-    justify-content:space-between;
-    gap: 50px;
+    justify-content:space-around;
+    /* gap: 50px; */
     border-radius: 14px;
 }
 .resultat .photo{
@@ -119,7 +117,15 @@
     width: 100%;
     height: 100%;
 }
-
+.container footer{
+    padding: 13px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #333;
+    color: #fff;
+}
 .resultat form{
     width: 370px;
     display: flex;
@@ -174,7 +180,7 @@ input[type="date"]:focus{
 .tableau { 
     background-color: #333; 
     padding: 20px; 
-    border-radius: 5px; 
+    border-radius: 15px; 
     border: 1px solid #000;
     height: 400px;
     overflow: hidden;

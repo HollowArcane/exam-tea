@@ -6,6 +6,7 @@ function setTable(tableBody, data, keys)
     tableBody.replaceChildren();
     for(let item of data)
     {
+        item.montant = Math.max(0, parseFloat(item.montant));
         const columns = keys.map(key => newNode("td", {}, [textNode(item[key])]));
         tableBody.append(newNode("tr", {}, columns));
     }

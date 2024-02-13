@@ -27,13 +27,12 @@
         <header>
             <img src="../../assets/img/The-Star-Online.png" alt="">
             <ul>
-                <ul>
-                    <li><a href="../edit-cueillette">Saisie de cueillettes</a></li>
-                    <li><a href="../edit-depense">Saisie des depenses</a></li>
-                    <li><a href="../result">Resultat</a></li>   
-                    <li><a href="../liste-paiement" class="active">Liste Paiement</a></li>         
-                    <li><a href="../login-user">Déconnexion</a></li>         
-                </ul>      
+                <li><a href="../edit-cueillette">Saisie de cueillettes</a></li>
+                <li><a href="../edit-depense">Saisie des depenses</a></li>
+                <li><a href="../result">Resultat</a></li>   
+                <li><a href="../liste-paiement" class="active">Liste Paiement</a></li>         
+                <li><a href="../prediction">Prevision</a></li>      
+                <li><a href="../login-user">Déconnexion</a></li>   
             </ul>
         </header>
         <div class="resultat">
@@ -65,7 +64,7 @@
             </table>
         </div>
         </div>
-        
+        <?php include "../footer.html"; ?>
     </div>
     
 </body>

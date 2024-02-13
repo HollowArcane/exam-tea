@@ -190,7 +190,7 @@
     }    
 
     function quantiteRestante($co , $dateFin ){     
-        $date_query = "SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('$dateFin') - 1 ELSE YEAR('$dateFin') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('$dateFin') >= mois)";
+        $date_query = "SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('$dateFin') - 1 ELSE YEAR('$dateFin') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('$dateFin') > mois)";
         
         $query = "SELECT vp.id_parcelle , (vp.kg_cueillette_par_mois - SUM(COALESCE(c.quantite, 0))) as reste  FROM v_pieds_par_parcelle as vp LEFT JOIN cueillette as c ON c.idParcelle = vp.id_parcelle  AND c.date BETWEEN ($date_query) AND '$dateFin' GROUP BY id_parcelle ";
         $result = mysqli_query($co, $query);
@@ -313,11 +313,18 @@
         return $array;
     }
 
+    function getPrixVarieteByNom($co , $nom ){
+        $query = "select prix from Variete where nom = '$nom' ";
+        $result = mysqli_query($co, $query);     
+        return mysqli_fetch_assoc($result)['prix'];
+    }
+
     function getFinalData($co , $date) {        
         $quantiteRestante = quantiteRestante($co , $date );
         
         $query = "SELECT * FROM v_pieds_par_parcelle ";
         $result = mysqli_query($co, $query);
+        
         
         $array = array();
     
@@ -334,9 +341,9 @@
                     $tempArray['reste'] = $quantiteRestante[$i]['reste'];
                 }
             }    
+            $tempArray['montant'] = getPrixVarieteByNom($co , $tempArray['nom']) * $tempArray['reste'];
             $array[] = $tempArray;
-        }
-    
+        }    
         return $array;
     }
     

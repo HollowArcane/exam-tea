@@ -53,6 +53,7 @@
 
             <a href="../edit-variete"><< Retour vers formulaire VARIETE</a>
         </div>
+        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

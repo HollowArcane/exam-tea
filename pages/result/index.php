@@ -30,7 +30,8 @@
                 <li><a href="../edit-depense">Saisie des depenses</a></li>
                 <li><a href="../result" class="active">Resultat</a></li>   
                 <li><a href="../liste-paiement">Liste Paiement</a></li>         
-                <li><a href="../login-user">Déconnexion</a></li>       
+                <li><a href="../prediction">Prevision</a></li>      
+                <li><a href="../login-user">Déconnexion</a></li>   
             </ul>
         </header>
         <div class="resultat">
@@ -62,6 +63,7 @@
             </table>
         </div>
         </div>
+        <?php include "../footer.html"; ?>
     </div>
     
 </body>

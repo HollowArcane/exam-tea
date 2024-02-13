@@ -51,6 +51,7 @@
 
             <a href="../edit-parcelle"><< Retour vers formulaire parcelle</a>
         </div>
+        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

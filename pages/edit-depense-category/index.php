@@ -54,7 +54,7 @@
                 <a href="../list-depense-category">Go to list CATEGORIES</a>
             </form>
         </div>
-
+        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

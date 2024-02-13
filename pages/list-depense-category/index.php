@@ -50,6 +50,7 @@
 
             <a href="../edit-depense-category"><< Retour vers formulaire CATEGORIES</a>
         </div>
+        <?php include "../footer.html"; ?>
     </div>
 </body>
 </html>

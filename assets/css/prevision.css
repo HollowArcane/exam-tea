@@ -15,22 +15,15 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex;
+    display: flex;    
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
-.container footer{
-    padding: 13px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    background-color: #333;
-    color: #fff;
-}
-
-header{
+.container header{
     position: fixed;
     top: 0;
     box-shadow:  1px 1px 17px 3px #00000059;
@@ -50,23 +43,23 @@ header{
     background-color: #fff;
     display: flex;
 } */
- header img{
+.container header img{
     width: 7%;
 }
- header ul{
+.container header ul{
     display: flex;
     gap: 65px;
 }
- header ul li{
+.container header ul li{
     position: relative;
 }
- header ul li a{
+.container header ul li a{
     color: #000;
 }
- header ul li a:hover{
+.container header ul li a:hover{
     color:#B721FF;
 }
- header ul li a::before {
+.container header ul li a::before {
     position: absolute;
     left: 1px;
     bottom: 0;
@@ -77,11 +70,11 @@ header{
     border-radius: 6px;
     transition: 0.3s;
 }
- header ul li a:hover::before{
+.container header ul li a:hover::before{
     width: 100%;
 }
 
- header ul li .active::before{
+.container header ul li .active::before{
     position: absolute;
     left: 1px;
     bottom: 0;
@@ -93,19 +86,79 @@ header{
     transition: 0.3s;
 }
 
-.saisie_cueillette {
+.prevision {
     box-shadow:  1px 1px 17px 3px #00000059;
-    padding-right: 104px;
-    width: 1200px;
-    height:600px;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%); */
+    width: 1400px;
+    height:700px;
     background-color: #fff;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content:space-between;
-    gap: 50px;
+    justify-content:space-evenly;
+    /* gap: 50px; */
     border-radius: 14px;
 }
-.saisie_cueillette .photo{
+.prevision .afficher{
+    padding: 14px;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.prevision .formulaire{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* gap: 190px; */
+    justify-content: space-around;
+}
+.prevision .formulaire .aff_restant{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.prevision .afficher .aff{
+    box-shadow:  1px 1px 17px 3px #00000059;
+    border-radius: 15px;
+    padding: 19px;
+    width: 300px;
+
+}
+.prevision .afficher .aff .nom{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.prevision .afficher .aff .information{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;   
+    flex-direction: column;
+    gap: 13px;
+}
+.prevision .afficher .aff .information .image{
+    height: 200px;
+}
+
+.prevision .afficher .aff .information .image img{
+    width: 100%;
+    height: 100%;
+} 
+ .prevision .photo{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -115,13 +168,21 @@ header{
     border-radius: 17px;
     background-color: #fff;
     overflow: hidden;
-}
-.saisie_cueillette .photo img{
+} 
+.prevision .photo img{
     width: 100%;
     height: 100%;
 }
-
-.saisie_cueillette form{
+.container footer{
+    padding: 13px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #333;
+    color: #fff;
+}
+.prevision form{
     width: 370px;
     display: flex;
     flex-direction: column;
@@ -132,14 +193,15 @@ header{
     padding: 19px;
     border-radius: 0 17px 17px 0;
 }
-.saisie_cueillette form .form-control{
+.prevision form .form-control{
     gap: 12px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
-.saisie_cueillette form .form-control input[type="text"],
+.prevision form .form-control input[type="text"],
 input[type="number"],
 input[type="date"]{
     background-color: #EAEEED;
@@ -148,13 +210,13 @@ input[type="date"]{
     border-style: none;
     outline: none;
 }
-.saisie_cueillette form .form-control input[type="text"],
+.prevision form .form-control input[type="text"],
 input[type="number"],
 input[type="date"]:focus{
     opacity: 0.7;
 }
 
-.saisie_cueillette form input[type="submit"]{
+.prevision form input[type="submit"]{
     padding: 12px 48px;
     border-radius: 50px;
     color: #fff;
@@ -166,8 +228,33 @@ input[type="date"]:focus{
     width: 100%;
 }
 
-.saisie_cueillette form .form-control select{
+.prevision form .form-control select{
     padding: 13px;
     border-radius: 50px;
     border: none;
+}
+
+.tableau { 
+    background-color: #333; 
+    padding: 20px; 
+    border-radius: 15px; 
+    border: 1px solid #000;
+    height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.tableau th,
+.tableau td {
+    padding: 8px; 
+    text-align: center; 
+}
+
+.tableau th {
+    background-color: #555; 
+    color: white; 
+}
+
+.tableau tr:nth-child(odd) {
+    background-color: #777; 
 }
