@@ -25,13 +25,19 @@ function loadCueilleur(select)
 function loadParcelle(select)
 { loadOptions(select, `../list-parcelle/get-parcelles.php`, { value: "id", label: "surface" }); }
 
+
 function createCueillette(form)
 {
-    sendPostRequest("insert-cueillette.php", form, req => {
-        if(req.responseText == "success")
-        { insertMsg(); }
-        else
-        { error(); }
+    sendPostRequest(`get-poids-restant.php`, form, req => {
+        if(parseFloat(req.responseText) < 0)
+        {
+            sendPostRequest("insert-cueillette.php", form, req => {
+                if(req.responseText == "success")
+                { insertMsg(); }
+                else
+                { error(); }
+            }, () => error());
+        }
     }, () => error());
 }
 

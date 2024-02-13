@@ -168,28 +168,24 @@ input[type="date"]:focus{
     border: none;
 }
 
-/* CSS pour la classe tableau */
 .tableau {
-    margin-top: 20px; /* Ajoute un espace en haut du tableau */
-    background-color: #333; /* Couleur de fond du tableau */
-    padding: 10px; /* Ajoute un espace à l'intérieur du tableau */
-    border-radius: 5px; /* Ajoute des coins arrondis au tableau */
+    margin-top: 20px; 
+    background-color: #333; 
+    padding: 10px; 
+    border-radius: 5px; 
 }
 
-/* CSS pour les cellules du tableau */
 .tableau th,
 .tableau td {
-    padding: 8px; /* Ajoute de l'espace à l'intérieur des cellules */
-    text-align: center; /* Centre le texte à l'intérieur des cellules */
+    padding: 8px; 
+    text-align: center; 
 }
 
-/* CSS pour les en-têtes de colonne du tableau */
 .tableau th {
-    background-color: #555; /* Couleur de fond des en-têtes de colonne */
-    color: white; /* Couleur du texte des en-têtes de colonne */
+    background-color: #555; 
+    color: white; 
 }
 
-/* CSS pour les lignes impaires du tableau */
 .tableau tr:nth-child(odd) {
-    background-color: #777; /* Couleur de fond des lignes impaires */
+    background-color: #777; 
 }

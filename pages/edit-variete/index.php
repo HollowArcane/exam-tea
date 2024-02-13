@@ -38,7 +38,7 @@
             <div class="photo">
                 <img src="../../assets/img/diffe_rents-types-de.jpg" alt="">
             </div>
-            <form id="form">              
+            <form update="<?= $_GET["id"] ?? null ?>" id="form">              
                 <div class="head">
                     <h1>Les varietes</h1>
                     <!-- <img src="../../img/Drinking tea-bro.png" alt="" style="width: 40%;"> -->
@@ -57,6 +57,7 @@
                 </div>
 
                 <input type="submit" value="OK">
+                <a href="../list-variete">Go to list VARIETE</a>
             </form>
         </div>
 

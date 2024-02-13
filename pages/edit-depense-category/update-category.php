@@ -7,11 +7,11 @@
     if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
     { exit; }
 
+    $desc = $_POST["description"];
     $id = $_GET["id"];
-
     try
     {
-        deleteCategorie(dbConnect(), $id);    
+        updateCategorie(dbConnect(), $id, $desc);    
         echo "success";
     }
     catch (\Throwable $th)

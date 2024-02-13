@@ -1,31 +1,47 @@
 const button = document.getElementById("btn");
+const tableBody = document.getElementById("liste");
 
-function createDepense(depense)
-{ console.log(depense); }
+function setTable(tableBody, data, keys)
+{
+    tableBody.replaceChildren();
+    for(let item of data)
+    {
+        const columns = keys.map(key => newNode("td", {}, [textNode(item[key])]));
+        const btnUpdate = newNode("button", {id:"modify"}, [textNode("Update")]);
+        const btnDelete = newNode("button", {id:"delete"}, [textNode("Delete")]);
+        btnDelete.addEventListener("click", e => deleteDepense(item.id));
+        btnUpdate.addEventListener("click", e => { window.location = `../edit-depense-category?id=${item.id}` });
+
+        columns.push(newNode("td", {}, [btnUpdate]), newNode("td", {}, [btnDelete]));
+
+        tableBody.append(newNode("tr", {}, columns));
+    }
+}
 
 function deleteDepense(id)
 {
     sendGetRequest(`delete-depense.php?id=${id}`, req => {
         try
-        { console.log(req.responseText); }
-        catch (error)
+        {
+            if(req.responseText == "success")
+            { getDepenses(tableBody); }
+        }
+        catch (err)
         { error(); }
     }, () => error());
 }
 
-function getDepenses()
+function getDepenses(tableBody)
 {
     sendGetRequest("get-depenses.php", req => {
         try
+        { setTable(tableBody, JSON.parse(req.responseText), ["description"]); }
+        catch (err)
         {
-            const data = JSON.parse(req.responseText);
-            for(depense of data)
-            { createDepense(depense); }
+            console.log(err);
+            error();
         }
-        catch (error)
-        { error(); }
     }, () => error());
 }
 
-getDepenses();
-button.addEventListener("click", e => deleteDepense("0"));
+getDepenses(tableBody);

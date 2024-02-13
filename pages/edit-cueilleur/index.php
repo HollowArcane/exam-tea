@@ -38,7 +38,7 @@
             <div class="photo">
                 <img src="../../assets/img/cueilleurs.jpg" alt="">
             </div>
-            <form id="form">              
+            <form update="<?= $_GET["id"] ?? null ?>" id="form">              
                 <div class="head">
                     <h1>Cueilleurs</h1>
                     <!-- <img src="../../img/Drinking tea-bro.png" alt="" style="width: 40%;"> -->
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-control">
                     <label>Genre</label>
-                    <select name="genre">
+                    <select name="genre" id="genre">
                         <option value="Male">Masculin</option>
                         <option value="Female">Féminin</option>
                     </select>
@@ -64,10 +64,9 @@
                 </div>
 
                 <input type="submit" value="OK">
+                <a href="../list-cueilleur">Go to list CUEILLEURS</a>
             </form>
         </div>
-
-
     </div>
 </body>
 </html>

@@ -1,19 +1,17 @@
 <?php
     require "../../inc/connexion.php";
     require "../../inc/function.php";
-    
+
     session_start();
 
     if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
     { exit; }
 
     $id = $_GET["id"];
-
-    try
+    $categories = getDepenseCategorie(dbConnect(), $id);
+    foreach($categories as $category)
     {
-        deleteCategorie(dbConnect(), $id);    
-        echo "success";
+        if($category["id"] == $id)
+        { echo json_encode($category); }
     }
-    catch (\Throwable $th)
-    { var_dump($th); }
 ?>

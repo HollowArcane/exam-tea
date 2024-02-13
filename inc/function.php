@@ -139,6 +139,16 @@
         $result = mysqli_query($co, $query);
     }
 
+    function updateDepense($co, $idDepense , $idCategorie , $valeur , $date) {        
+        $query = "UPDATE depense SET idCategorie = '$idCategorie' , valeur = '$valeur' , date = '$date' WHERE idDepense = '$idDepense' ";
+        $result = mysqli_query($co, $query);
+    }
+
+    function updateCategorie($co, $id , $desc) {        
+        $query = "UPDATE categorie SET description = '$desc' WHERE id = '$id' ";
+        $result = mysqli_query($co, $query);
+    }
+
     function deleteCategorie($co, $id) {
         $query = "DELETE FROM Categorie WHERE id = '$id'";
         $result = mysqli_query($co, $query);

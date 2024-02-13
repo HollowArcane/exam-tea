@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    
     if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
     {
         header("Location: ../login-admin");
@@ -8,19 +8,19 @@
     }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories de depenses</title>
-    <link rel="stylesheet" href="../../assets/css/categories.css">
+    <title>Liste des Categories</title>
+    <link rel="stylesheet" href="../../assets/css/liste_categories.css">
 
     <script src="../../assets/js/function-XHR.js"></script>
+    <script src="../../assets/js/function-DOM.js"></script>
     <script src="../../assets/js/function.js"></script>
     <script src="script.js" defer></script>
-</head>
+</head> 
 <body>
     <div class="container">
         <header>
@@ -35,26 +35,21 @@
             </ul>
         </header>
 
-        <div class="categories">
-            <div class="photo">
-                <img src="../../assets/img/depenses.jpg" alt="">
-            </div>
-            <form update="<?= $_GET["id"] ?? null ?>" id="form">              
-                <div class="head">
-                    <h1>Categories de depenses</h1>
-                    <!-- <img src="../../img/Drinking tea-bro.png" alt="" style="width: 40%;"> -->
-                </div>
-                <div class="form-control">
-                    <label for="nom">Nom</label>
-                    <input type="text" name="description" id="nom" placeholder="Nom">
-                </div>
-                
+        <div class="listes">
+            <h1>Listes Varietes</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="liste"></tbody>
+            </table>
 
-                <input type="submit" value="OK">
-                <a href="../list-depense-category">Go to list CATEGORIES</a>
-            </form>
+            <a href="../edit-depense-category"><< Retour vers formulaire CATEGORIES</a>
         </div>
-
     </div>
 </body>
 </html>

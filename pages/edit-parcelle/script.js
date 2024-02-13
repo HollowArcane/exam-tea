@@ -1,6 +1,8 @@
 const form = document.getElementById("form");
+const update = form.getAttribute("update");
+
 const select = document.getElementById("variete");
-let modeUpdate = false;
+const surface = document.getElementById("surface");
 
 function createParcelle(form)
 {
@@ -26,12 +28,16 @@ function getParcelle(id)
 {
     sendGetRequest(`get-parcelle.php?id=${id}`, req => {
         try
-        {
-            const data = JSON.parse(req.responseText);
-        }
-        catch (error)
+        { setForm(JSON.parse(req.responseText)); }
+        catch (err)
         { error(); }
     }, () => error());
+}
+
+function setForm(data)
+{
+    surface.value = data.surface;
+    select.value = data.variete;
 }
 
 function addVarieteOptions(select, data)
@@ -45,14 +51,18 @@ function loadVariete(select)
 {
     sendGetRequest(`../list-variete/get-varietes.php`, req => {
         try
-        { addVarieteOptions(JSON.parse(req.responseText)); }
-        catch (error)
+        { addVarieteOptions(select, JSON.parse(req.responseText)); }
+        catch (err)
         { error(); }
     }, () => error());
 }
 
 loadVariete(select);
+
+if(update != "")
+{ getParcelle(update); }
+
 form.addEventListener("submit", e => {
     e.preventDefault();
-    modeUpdate ? updateParcelle(form): createParcelle(form);
+    update != "" ? updateParcelle(update, form): createParcelle(form);
 })
