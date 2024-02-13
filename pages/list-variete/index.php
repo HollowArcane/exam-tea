@@ -30,7 +30,7 @@
                 <li><a href="../edit-variete" class="active">Variete</a></li>
                 <li><a href="../edit-cueilleur">Cueilleurs</a></li>
                 <li><a href="../edit-depense-category">Categories</a></li>
-                <li><a href="../listes.html">Listes</a></li>
+                <li><a href="../edit-configuration">Configuration</a></li>
                 <li><a href="../login-admin">Déconnexion</a></li>
             </ul>
         </header>
@@ -43,6 +43,7 @@
                         <th>Nom</th>
                         <th>Occupation</th>
                         <th>Rendement</th>
+                        <th>Prix</th>
                         <th>Action</th>
                         <th>Action</th>
                     </tr>

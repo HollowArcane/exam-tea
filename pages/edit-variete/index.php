@@ -29,7 +29,7 @@
                 <li><a href="../edit-variete" class="active">Variete</a></li>
                 <li><a href="../edit-cueilleur">Cueilleurs</a></li>
                 <li><a href="../edit-depense-category">Categories</a></li>
-                <li><a href="../listes.html">Listes</a></li>
+                <li><a href="../edit-configuration">Configuration</a></li>
                 <li><a href="../login-admin">Déconnexion</a></li>
             </ul>
         </header>
@@ -54,6 +54,10 @@
                 <div class="form-control">
                     <label for="rendement">Rendement</label>
                     <input type="number" name="rendement" id="rendement" placeholder="Rendement par pied" min="0">
+                </div>
+                <div class="form-control">
+                    <label for="prix">Rendement</label>
+                    <input type="number" name="prix" id="prix" placeholder="Prix" min="0">
                 </div>
 
                 <input type="submit" value="OK">

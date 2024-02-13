@@ -73,13 +73,13 @@
         }
     }
 
-    function insertVariety($co, $nom, $occupation , $rendement) {
-        $query = "INSERT INTO variete (nom, occupation , rendement) VALUES ('$nom', '$occupation', '$rendement')";
+    function insertVariety($co, $nom, $occupation , $rendement , $prix) {
+        $query = "INSERT INTO variete (nom, occupation , rendement , prix) VALUES ('$nom', '$occupation', '$rendement')";
         $result = mysqli_query($co, $query);
     }
     
-    function updateVariety($co, $id, $nom, $occupation , $rendement) {
-        $query = "UPDATE variete SET nom = '$nom', occupation = '$occupation' , rendement = '$rendement' WHERE id = '$id'";
+    function updateVariety($co, $id, $nom, $occupation , $rendement , $prix) {
+        $query = "UPDATE variete SET nom = '$nom', occupation = '$occupation' , rendement = '$rendement' , prix = '$prix' WHERE id = '$id'";
         $result = mysqli_query($co, $query);
     }
     
@@ -190,9 +190,9 @@
     }    
 
     function quantiteRestante($co , $dateFin ){     
-        $tab = explode("-" , $dateFin);
-        $dateDebut = $tab[0] . "-" . $tab[1] . "-01";
-        $query = "SELECT vp.id_parcelle , (vp.kg_cueillette_par_mois - SUM(c.quantite)) as reste  FROM v_pieds_par_parcelle as vp JOIN cueillette as c ON c.idParcelle = vp.id_parcelle  WHERE c.date BETWEEN '$dateDebut' AND '$dateFin' GROUP BY id_parcelle ";
+        $date_query = "SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('$dateFin') - 1 ELSE YEAR('$dateFin') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('$dateFin') > mois)";
+        
+        $query = "SELECT vp.id_parcelle , (vp.kg_cueillette_par_mois - SUM(COALESCE(c.quantite, 0))) as reste  FROM v_pieds_par_parcelle as vp LEFT JOIN cueillette as c ON c.idParcelle = vp.id_parcelle  AND c.date BETWEEN ($date_query) AND '$dateFin' GROUP BY id_parcelle ";
         $result = mysqli_query($co, $query);
         $array = array();
         while($row = mysqli_fetch_assoc($result)) {
@@ -206,4 +206,54 @@
         $result = mysqli_query($co, $query);     
         return mysqli_fetch_assoc($result)['depense_total'];    
     }
+
+    #------------ PART 2 ------------------#
+    function getPaiement($co , $dateDebut , $dateFin){
+        $query = "SELECT v.nom, ct.date, ct.quantite, '10' as bonus, v.salaire * (1+(10/100)) as montant FROM cueillette as ct JOIN v_salaire_par_cueillette as v ON ct.idCueilleur = v.id_cueilleur WHERE ct.date BETWEEN '$dateDebut' AND '$dateFin';";
+        $result = mysqli_query($co, $query);     
+        $array = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $array[] = $row; 
+        }
+        return $array;
+    }
+
+    function getMontantVente( $co , $dateDebut , $dateFin ){
+        $query = " SELECT  SUM(valeur) as vente_total FROM v_vente_cueillette WHERE date BETWEEN '$dateDebut' AND '$dateFin'  ";
+        $result = mysqli_query($co, $query);     
+        return mysqli_fetch_assoc($result)['vente_total'];    
+    }
+
+    function getDepenseTotal( $co , $dateDebut , $dateFin){
+        $paiements = getPaiement( $co , $dateDebut , $dateFin);
+        $depense = (float)sumDepense( $co , $dateDebut , $dateFin);
+
+        foreach($paiements as $paiement) {
+            $depense += (float)$paiement['montant'];
+        }
+
+        return $depense;
+    }
+
+    function deleteRegeneration($co){
+        $query = "delete from mois_regeneration"; 
+        $result = mysqli_query($co, $query);     
+    }
+
+    function insertRegeneration( $co , $mois, $label ){
+        $query = "insert into mois_regeneration values( $mois, '$label' )"; 
+        $result = mysqli_query($co, $query);     
+    }
+
+    function insertConfiguration( $co , $desc , $valeur ){
+        $query = "insert into configuration (description,valeur) values( '$desc', '$valeur' )"; 
+        $result = mysqli_query($co, $query);     
+    }
+
+    function updateConfiguration( $co , $desc , $valeur ){
+        $query = "update configuration set valeur = '$valeur' WHERE description = '$desc'"; 
+        $result = mysqli_query($co, $query);     
+    }
+
+    
 ?>

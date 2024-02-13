@@ -41,7 +41,7 @@ function getVarietes()
 {
     sendGetRequest("get-varietes.php", req => {
         try
-        { setTable(tableBody, JSON.parse(req.responseText), ["nom", "occupation", "rendement"]); }
+        { setTable(tableBody, JSON.parse(req.responseText), ["nom", "occupation", "rendement", "prix"]); }
         catch (error)
         { error(); }
     }, () => error());

@@ -19,6 +19,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     overflow-y: auto;
 }
 
@@ -86,7 +87,7 @@
 }
 
 .resultat {
-    margin-top: 150px;
+    margin-top: 160px;
     margin-bottom: 10px;
     box-shadow:  1px 1px 17px 3px #00000059;
     padding-right: 104px;
@@ -170,13 +171,14 @@ input[type="date"]:focus{
     border: none;
 }
 
-.tableau {
+.tableau { 
+    background-color: #333; 
+    padding: 20px; 
+    border-radius: 5px; 
+    border: 1px solid #000;
     height: 400px;
     overflow: hidden;
     overflow-y: auto;
-    background-color: #333; 
-    padding: 10px; 
-    border-radius: 5px; 
 }
 
 .tableau th,

@@ -8,19 +8,12 @@ create table admin(
     mdp VARCHAR(255)
 );
 
-create table cueilleur(
-    id INT PRIMARY KEY auto_increment,    
-    nom VARCHAR(50), 
-    genre VARCHAR(25),     
-    naissance VARCHAR(50),     
-    salaire DOUBLE
-);
-
 create table variete(
     id INT PRIMARY KEY auto_increment,    
     nom VARCHAR(50), 
     occupation DOUBLE, 
-    rendement FLOAT
+    rendement FLOAT,
+    prix FLOAT
 );
 
 create table parcelle(
@@ -34,8 +27,6 @@ create table categorie(
     description VARCHAR(255)
 );
 
-
-
 create table depense(
     idDepense INT PRIMARY KEY auto_increment,
     idCategorie INT REFERENCES categorie(id),
@@ -48,9 +39,15 @@ CREATE TABLE cueillette (
     idCueilleur INT,
     idParcelle INT,
     quantite DOUBLE,
-    date DATE,
-    FOREIGN KEY (idCueilleur) REFERENCES cueilleur(id),
-    FOREIGN KEY (idParcelle) REFERENCES parcelle(id)
+    date DATE    
+);
+
+create table cueilleur(
+    id INT PRIMARY KEY auto_increment,    
+    nom VARCHAR(50), 
+    genre VARCHAR(25),     
+    naissance VARCHAR(50),     
+    salaire DOUBLE
 );
 
 create table user(
@@ -59,6 +56,30 @@ create table user(
     email VARCHAR(255),     
     mdp VARCHAR(255)
 );
+
+CREATE TABLE mois_regeneration(
+    mois INT,
+    label VARCHAR(2)
+);
+
+CREATE TABLE configuration(
+    id INT PRIMARY KEY auto_increment,    
+    description VARCHAR(50),
+    valeur FLOAT
+);
+
+INSERT INTO configuration VALUES(NULL, 'poids minimum', 10),(NULL, 'bonus', 10),(NULL, 'malus', 10);
+
+
+
+
+
+INSERT INTO mois_regeneration VALUES(1, '01'),(3, '03'),(4, '04');
+CREATE OR REPLACE VIEW v_mois_regeneration AS
+SELECT * FROM mois_regeneration
+UNION ALL SELECT mois - 12, label FROM mois_regeneration; 
+
+insert into user (nom , email , mdp) values ('mamihery' , 'mamihery@gmail.com' , sha1('mamihery') );
 
 INSERT INTO admin (nom, email, mdp) VALUES
 ('Rambao', 'rambao@gmail.com', sha1('rambao')),
@@ -69,10 +90,10 @@ INSERT INTO cueilleur (nom, genre, naissance, salaire) VALUES
 ('Cueilleur1', 'Male', '1990-01-15', 1500.00),
 ('Cueilleur2', 'Female', '1985-07-22', 1800.00);
 
-INSERT INTO variete (nom, occupation, rendement) VALUES  
-('The Apple Variety',  100.00,  2.0),
-('The Orange Variety',  150.00,  1.5),
-('The Grape Variety',  200.00,  3.0);
+INSERT INTO variete (nom, occupation, rendement , prix) VALUES  
+('The Apple Variety',  100.00,  2.0 , 1000),
+('The Orange Variety',  150.00,  1.5 , 1000),
+('The Grape Variety',  200.00,  3.0 , 1000);
 
 INSERT INTO parcelle (surface, variete) VALUES  
 (10.00,  1),
@@ -90,60 +111,60 @@ insert into categorie (description) values
 ('engrais');
 
 
-------- VIEW ----------
 CREATE VIEW v_pieds_par_parcelle AS
 SELECT
     p.id AS id_parcelle,
-    v.nom AS nom_du_variete,
+    COALESCE(v.nom,"") AS nom_du_variete,
     p.surface * 10000 AS surface_metres_carres, 
-    v.occupation AS occupation_pieds_par_metre_carre,
-    ROUND((p.surface * 10000) / v.occupation) AS nombre_de_pieds,
-    ROUND((p.surface * 10000) / v.occupation) * v.rendement AS kg_cueillette_par_mois
+    COALESCE(v.occupation,0) AS occupation_pieds_par_metre_carre,
+    COALESCE(ROUND((p.surface * 10000) / v.occupation),0) AS nombre_de_pieds,
+    COALESCE(ROUND((p.surface * 10000) / v.occupation) * v.rendement , 0) AS kg_cueillette_par_mois
+
 FROM
     parcelle p
-JOIN
+LEFT JOIN
     variete v ON p.variete = v.id;
 
-
-CREATE VIEW v_cueillie_par_parcelle AS
-SELECT 
-    idParcelle as id_parcelle, 
-    SUM(quantite) as quantite_total, 
-    MONTH(date) as mois, 
-    YEAR(date) as annees  
-FROM 
-    cueillette 
-GROUP BY 
-    id_parcelle , mois , annees ;
-
-
-SELECT 
-    vc.*,     
-    vp.kg_cueillette_par_mois - vc.quantite_total  as quantite_restante
+CREATE VIEW v_salaire_par_cueillette AS
+SELECT    
+    ct.id,
+    c.id as id_cueilleur,
+    c.nom,
+    ct.date,
+    ct.quantite,
+    ct.quantite * c.salaire as salaire 
 FROM
-    v_pieds_par_parcelle as vp
+    cueillette as ct
 JOIN
-    v_cueillie_par_parcelle as vc
-ON
-    vp.id_parcelle = vc.id_parcelle
-WHERE 
-    mois = '02'
-AND
-    annees = '2024';
-
+    cueilleur c ON c.id = ct.idCueilleur;
 
 
 SELECT
-    SUM(quantite) as total_cueillette,
-    MONTH(date) as mois, 
-    YEAR(date) as annees  
-FROM
-    cueillette
-WHERE 
-    MONTH(date) = '2'
-GROUP BY
-    mois , annees;
+    v.nom,
+    ct.date,
+    ct.quantite,
+    '10' as bonus,
+    v.salaire * (1+(10/100)) as montant
+FROM 
+    cueillette as ct
+JOIN
+    v_salaire_par_cueillette as v
+ON
+    ct.idCueilleur = v.id_cueilleur;
 
 
+CREATE OR REPLACE VIEW v_vente_cueillette AS
+SELECT
+    c.date, c.quantite*v.prix AS valeur
+FROM 
+    cueillette as c
+JOIN 
+    parcelle as p
+ON
+    p.id = c.idParcelle
+JOIN
+    variete as v
+ON
+    p.variete = v.id;
 
-SELECT SUM(valeur) as depense_total , idCategorie , date FROM Depense WHERE MONTH(date) = '2'AND YEAR(date) = '2024';
+SELECT CONCAT(CASE  WHEN mois < 0 THEN YEAR('2023/05/01') - 1 ELSE YEAR('2023/05/01') END, '-', label, '-01') AS result FROM v_mois_regeneration WHERE mois = (SELECT MAX(mois) FROM v_mois_regeneration WHERE MONTH('2023/05/01') > mois);

@@ -9,17 +9,10 @@
 
     $date_debut = $_POST["date_debut"];
     $date_fin = $_POST["date_fin"];
-    $database = dbConnect();
 
     try
     {
-        $data = [
-            "poids_total" => totalCueillette($database, $date_debut, $date_fin),
-            "poids_restant" => quantiteRestante($database, $date_fin),
-            "vente" => getMontantVente($database, $date_debut, $date_fin),
-            "depense" => getDepenseTotal($database, $date_debut , $date_fin)
-        ];
-
+        $data = getPaiement(dbConnect(), $date_debut, $date_fin);
         echo json_encode($data);
     }
     catch (\Throwable $th)

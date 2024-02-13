@@ -11,10 +11,11 @@
     $nom = $_POST["nom"];
     $occupation = $_POST["occupation"];
     $rendement = $_POST["rendement"];
+    $prix = $_POST["prix"];
 
     try
     {
-        updateVariety(dbConnect(), $id, $nom, $occupation , $rendement);    
+        updateVariety(dbConnect(), $id, $nom, $occupation , $rendement, $prix);    
         echo "success";
     }
     catch (\Throwable $th)

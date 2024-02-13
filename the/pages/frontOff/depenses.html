@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saisie des depenses</title>
+    <link rel="stylesheet" href="../../assets/saisie_depenses.css">
+</head>
+<body>
+    
+    <div class="container">      
+        <header>
+            <img src="../../img/The-Star-Online.png" alt="">
+            <ul>
+                
+                <li><a href="cueillettes.html">Saisie de cueillettes</a></li>
+                <li><a href="depenses.html" class="active">Saisie des depenses</a></li>
+                <li><a href="resultat.html">Resultat</a></li>      
+                <li><a href="listes_paiements.html">Listes Paiement</a></li>           
+      
+            </ul>
+        </header>
+        <div class="saisie_depenses">
+            <div class="photo">
+                <img src="../../img/depenses.jpg" alt="">
+            </div>
+            <form action="">              
+                <div class="head">
+                    <h1>Saisie des Depenses</h1>
+                    <!-- <img src="../../img/Drinking tea-bro.png" alt="" style="width: 40%;"> -->
+                </div>
+                <div class="form-control">
+                    <label for="nom">Date</label>
+                    <input type="date" name="date" id="date" placeholder="date">
+                </div>
+                <div class="form-control">
+                    <label>Choix categorie depense</label>
+                    <select name="choix_categorie_depense" id="choix">
+                        <option hidden>Choix categorie depense</option>
+                        <option value="#">here</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label>Montant</label>
+                    <input type="number" name="montant" id="montant" placeholder="Montant" min="0">
+                </div>
+
+                <input type="submit" value="OK">
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

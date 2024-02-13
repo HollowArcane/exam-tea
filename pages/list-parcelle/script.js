@@ -33,7 +33,7 @@ function deleteParcelle(id)
     }, () => error());
 }
 
-function getParcelles()
+function getParcelles(tableBody)
 {
     sendGetRequest("get-parcelles.php", req => {
         try

@@ -7,14 +7,12 @@
     if(!isset($_SESSION["role"]) || $_SESSION["role"] != "admin")
     { exit; }
 
-    $nom = $_POST["nom"];
-    $occupation = $_POST["occupation"];
-    $rendement = $_POST["rendement"];
-    $prix = $_POST["prix"];
+    $label = $_GET["label"];
+    $value = $_POST["value"];
 
     try
     {
-        insertVariety(dbConnect(), $nom, $occupation , $rendement, $prix);    
+        updateConfiguration(dbConnect(), $label, $value);
         echo "success";
     }
     catch (\Throwable $th)

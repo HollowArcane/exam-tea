@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+.container{
+    background-image: linear-gradient(45deg,#21D4FD 0%,#B721FF 100%);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.container header{
+    position: fixed;
+    top: 0;
+    box-shadow:  1px 1px 17px 3px #00000059;
+    height: 90px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    margin: 0 54px 0 54px;
+    justify-content: space-between;
+    padding: 0 100px 0 100px;
+    
+}
+
+/* .container .variete{
+    height: 600px;
+    margin: 53px;
+    border-radius: 9px;
+    background-color: #fff;
+    display: flex;
+} */
+.container header img{
+    width: 7%;
+}
+.container header ul{
+    display: flex;
+    gap: 65px;
+}
+.container header ul li{
+    position: relative;
+}
+.container header ul li a{
+    color: #000;
+}
+.container header ul li a:hover{
+    color:#B721FF;
+}
+.container header ul li a::before {
+    position: absolute;
+    left: 1px;
+    bottom: 0;
+    content: "";
+    background-color:#B721FF;
+    width: 0%;
+    height: 2px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.container header ul li a:hover::before{
+    width: 100%;
+}
+
+.container header ul li .active::before{
+    position: absolute;
+    left: 1px;
+    bottom: 0;
+    content: "";
+    background-color:#B721FF;
+    width: 100%;
+    height: 2px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.container .configuration{
+    margin-top: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 60px;
+    border-radius: 13px;
+    width: 700px;
+    gap: 70px;
+}
+.container .configuration .conf_mois form select{
+    padding: 13px;
+    border-radius: 50px;
+    border: none;
+}
+
+.container .configuration .conf_mois form{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   border: 1px solid #000;
+   border-radius: 16px;
+   padding: 16px;
+   gap: 37px;
+}
+.container .configuration .conf_mois form input[type="submit"]{
+    background-color: #000;
+    cursor: pointer;
+    padding: 13px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+}
+
+.container .configuration .conf_mois form .check-month{
+    width: 100%;
+    display: flex;
+    grid-area: "vi";
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.container .configuration .check-month .month-control{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .configuration .conf_poids_minimal input[type="number"]{
+    background-color: #EAEEED;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border-style: none;
+    outline: none;
+}
+
+.container .configuration .conf_poids_minimal form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.container .configuration .conf_poids_minimal form input[type="submit"]{
+    background-color: #000;
+    cursor: pointer;
+    padding: 13px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+}
+.container .configuration .conf_poids_minimal form input[type="number"]:focus{
+    opacity: 0.7;
+}
+
+/* conf bonus */
+.container .configuration .conf_bonus form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+.container .configuration .conf_bonus input[type="number"]{
+    background-color: #EAEEED;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border-style: none;
+    outline: none;
+}
+
+.container .configuration .conf_bonus input[type="submit"]{
+    background-color: #000;
+    cursor: pointer;
+    padding: 13px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+}
+
+.container .configuration .conf_bonus input[type="number"]:focus{
+    opacity: 0.7;
+}
+
+/* conf mallus */
+.container .configuration .conf_mallus form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.container .configuration .conf_mallus input[type="number"]{
+    background-color: #EAEEED;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border-style: none;
+    outline: none;
+}
+.container .configuration .conf_mallus input[type="submit"]{
+    background-color: #000;
+    cursor: pointer;
+    padding: 13px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+}
+.container .configuration .conf_mallus input[type="number"]:focus{
+    opacity: 0.7;
+}
+
+/* configuration prix de vente par variete de the */
+.container .configuration .prix_vente form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.container .configuration .prix_vente input[type="number"]{
+    background-color: #EAEEED;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border-style: none;
+    outline: none;
+}
+.container .configuration .prix_vente input[type="submit"]{
+    background-color: #000;
+    cursor: pointer;
+    padding: 13px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+}
+.container .configuration .prix_vente input[type="number"]:focus{
+    opacity: 0.7;
+}

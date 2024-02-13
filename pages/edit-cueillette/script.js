@@ -1,6 +1,7 @@
 const form = document.getElementById("form");
 const parcelle = document.getElementById("parcelle");
 const cueilleur = document.getElementById("cueilleur");
+const poids = document.getElementById("poids");
 
 function addOptions(select, data, keys)
 {
@@ -23,21 +24,31 @@ function loadCueilleur(select)
 { loadOptions(select, `../list-cueilleur/get-cueilleurs.php`, { value: "id", label: "nom" }); }
 
 function loadParcelle(select)
-{ loadOptions(select, `../list-parcelle/get-parcelles.php`, { value: "id", label: "surface" }); }
+{ loadOptions(select, `../list-parcelle/get-parcelles.php`, { value: "id", label: "id" }); }
 
 
 function createCueillette(form)
 {
     sendPostRequest(`get-poids-restant.php`, form, req => {
-        if(parseFloat(req.responseText) < 0)
+        try
         {
-            sendPostRequest("insert-cueillette.php", form, req => {
-                if(req.responseText == "success")
-                { insertMsg(); }
-                else
-                { error(); }
-            }, () => error());
+            console.log(parseFloat(poids.value));
+            console.log(parseInt(req.responseText));
+            if(parseFloat(poids.value) <= parseFloat(req.responseText))
+            {
+                sendPostRequest("insert-cueillette.php", form, req => {
+                    if(req.responseText == "success")
+                    { insertMsg(); }
+                    else
+                    { error(); }
+                }, () => error());
+            }
+            else
+            { error(); }
         }
+        catch (err)
+        { error(); }
+        
     }, () => error());
 }
 

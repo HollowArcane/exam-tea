@@ -3,6 +3,7 @@ const tableBody = document.getElementById("table-body");
 
 function setTableData(tableBody, data)
 {
+    console.log(data);
     tableBody.replaceChildren();
     for(let item of data.poids_restant)
     {
@@ -13,11 +14,20 @@ function setTableData(tableBody, data)
     }
 
     tableBody.append(newNode("tr", {}, [
-        newNode("td", {}, ["Cueillette Total"]),
-        newNode("td", {}, ["Prix de revient/kg"])
+        newNode("td", {}, [textNode("Ventes Total")]),
+        newNode("td", {}, [textNode(data.vente || 0)])
     ]), newNode("tr", {}, [
-        newNode("td", {}, [textNode(data.poids_total || 0)]),
-        newNode("td", {}, [textNode(parseFloat(data.cout_revient || 0)/parseFloat(data.poids_total || 0))])
+        newNode("td", {}, [textNode("Depenses Total")]),
+        newNode("td", {}, [textNode(data.depense)])
+    ]), newNode("tr", {}, [
+        newNode("td", {}, [textNode("Bénéfice")]),
+        newNode("td", {}, [textNode(parseFloat(data.vente) - parseFloat(data.depense))])
+    ]), newNode("tr", {}, [
+        newNode("td", {}, [textNode("Poids Total")]),
+        newNode("td", {}, [textNode(data.poids_total)])
+    ]), newNode("tr", {}, [
+        newNode("td", {}, [textNode("Coût de revient par kg")]),
+        newNode("td", {}, [textNode(parseFloat(data.depense || 0)/parseFloat(data.poids_total || 0))])
     ]));
 }
 

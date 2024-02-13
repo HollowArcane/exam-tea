@@ -4,6 +4,7 @@ const update = form.getAttribute("update");
 const nom = document.getElementById("nom");
 const occupation = document.getElementById("Occupation");
 const rendement = document.getElementById("rendement");
+const prix = document.getElementById("prix");
 
 function createVariete(form)
 {
@@ -40,6 +41,7 @@ function setForm(data)
     nom.value = data.nom;
     occupation.value = data.occupation;
     rendement.value = data.rendement;
+    prix.value = data.prix;
 }
 
 if(update != "")
